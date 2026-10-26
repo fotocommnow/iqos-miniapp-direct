@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>IQOS CLUB | Official Mini App</title>
+  <!-- Telegram Web App SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <!-- Google Fonts: Syne & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==================== SPLASH SCREEN (VIDEO & BRAND REVEAL) ==================== -->
+  <div id="splashScreen" class="splash-screen">
+    <!-- Canvas Dynamic Ambient Video Generator (4K Luxury Particle Motion & Laser Rays) -->
+    <canvas id="splashCanvas" class="splash-canvas"></canvas>
+    <div class="splash-overlay"></div>
+
+    <div class="splash-content">
+      <!-- Animated Brand Badge -->
+      <div class="brand-badge-ring">
+        <div class="pulse-ring"></div>
+        <div class="brand-core-icon">
+          <svg viewBox="0 0 60 60" fill="none">
+            <circle cx="30" cy="30" r="26" stroke="url(#cyanGlow)" stroke-width="2.5" stroke-dasharray="140" stroke-dashoffset="30"/>
+            <path d="M30 16V44M16 30H44" stroke="#00d2ff" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="30" cy="30" r="6" fill="#00f2fe"/>
+            <defs>
+              <linearGradient id="cyanGlow" x1="0" y1="0" x2="60" y2="60">
+                <stop stop-color="#00f2fe"/>
+                <stop offset="1" stop-color="#4facfe"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+
+      <div class="brand-text-block">
+        <h1 class="splash-logo">IQOS <span class="accent-iluma">ILUMA</span></h1>
+        <p class="splash-sub">NEXT LEVEL SENSATION &bull; SMARTCORE INDUCTION</p>
+      </div>
+
+      <!-- Realtime Video Teaser Status Bar -->
+      <div class="video-loader-bar">
+        <div class="video-progress" id="splashProgress"></div>
+      </div>
+      <div class="splash-timer-badge">
+        <span class="timer-dot"></span>
+        <span id="splashTimer">HQ REEL &bull; 00:10</span>
+      </div>
+
+      <button id="skipSplashBtn" class="skip-btn">
+        <span>ПРОПУСТИТЬ ЗАСТАВКУ</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4l10 8-10 8V4zM19 5v14"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN APPLICATION CONTAINER ==================== -->
+  <div id="appContainer" class="app-container">
+    
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="header-brand">
+        <div class="iqos-logo-pill">
+          <div class="logo-dot"></div>
+          <span class="logo-name">IQOS</span>
+          <span class="logo-tag">CLUB</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="status-chip" id="userTierChip">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <span>PLATINUM &bull; 1,450 Б</span>
+        </div>
+        <button class="cart-trigger-btn" id="openCartBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Dynamic Content Views -->
+    <main class="main-content">
+      
+      <!-- TAB 1: SHOWROOM & CATALOG -->
+      <section id="viewShowroom" class="app-view active">
+        
+        <!-- Hero Interactive Banner -->
+        <div class="hero-showcase">
+          <div class="hero-bg-wrapper">
+            <img src="assets/images/hero_banner.jpg" alt="IQOS Iluma Banner" class="hero-img">
+            <div class="hero-gradient-overlay"></div>
+          </div>
+          <div class="hero-caption">
+            <span class="badge-exclusive">ИНДУКЦИОННЫЙ НАГРЕВ SMARTCORE</span>
+            <h2>IQOS ILUMA PRIME</h2>
+            <p>Без лезвия. Без чистки. Совершенно новый уровень вкуса чистого табака.</p>
+            <div class="hero-actions">
+              <button class="btn-primary" onclick="app.quickOrder('ILUMA Prime Bronze Edition', 6490)">
+                <span>Заказать в боте</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+              <button class="btn-glass" onclick="app.switchTab('flavorLab')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                <span>Подбор вкуса</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Pills Filter -->
+        <div class="category-filter-scroll">
+          <button class="cat-pill active" data-category="all">Все новинки</button>
+          <button class="cat-pill" data-category="devices">Устройства</button>
+          <button class="cat-pill" data-category="terea">Стики TEREA</button>
+          <button class="cat-pill" data-category="accessories">Чехлы и Кольца</button>
+        </div>
+
+        <!-- Product Cards Grid -->
+        <div class="catalog-grid" id="catalogGrid">
+          <!-- Populated dynamically via JS -->
+        </div>
+
+      </section>
+
+      <!-- TAB 2: FLAVOR LAB (SMART QUIZ & FLAVOR COMPASS) -->
+      <section id="viewFlavorLab" class="app-view">
+        <div class="view-header-title">
+          <span class="sub-label">ИНТЕРАКТИВНЫЙ ГИД</span>
+          <h2>TEREA Flavor Compass</h2>
+          <p>Выберите ваши вкусовые предпочтения, и умный сенсор определит идеальный бленд стиков.</p>
+        </div>
+
+        <div class="flavor-compass-card">
+          <div class="radar-visual">
+            <div class="radar-ring r1"></div>
+            <div class="radar-ring r2"></div>
+            <div class="radar-ring r3"></div>
+            <div class="radar-pulse"></div>
+            <div class="radar-center-icon">🍃</div>
+          </div>
+
+          <div class="flavor-sliders">
+            <div class="slider-group">
+              <div class="slider-label">
+                <span>Интенсивность табака</span>
+                <span id="intensityVal" class="val-badge">Высокая (5/5)</span>
+              </div>
+              <input type="range" id="intensityRange" min="1" max="5" value="5" class="custom-range">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-label">
+                <span>Свежесть (Ментол / Лед)</span>
+                <span id="mentholVal" class="val-badge">Умеренная (2/5)</span>
+              </div>
+              <input type="range" id="mentholRange" min="0" max="5" value="2" class="custom-range">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-label">
+                <span>Фруктово-ягодные ноты</span>
+                <span id="aromaVal" class="val-badge">Тонкие (3/5)</span>
+              </div>
+              <input type="range" id="aromaRange" min="0" max="5" value="3" class="custom-range">
+            </div>
+          </div>
+
+          <div class="flavor-recommendation-box" id="flavorResultBox">
+            <div class="rec-badge">РЕКОМЕНДОВАННЫЙ БЛЕНД</div>
+            <h3 id="recTitle">TEREA Amber Selection</h3>
+            <p id="recDesc">Богатый, сбалансированный табачный вкус с тонкими древесными оттенками и нотками ореха.</p>
+            <button class="btn-primary full-width" id="addRecommendedBtn">
+              Добавить в корзину (240 ₽ / пачка)
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: SMART DEVICE DIAGNOSTICS & WARRANTY -->
+      <section id="viewDevice" class="app-view">
+        <div class="view-header-title">
+          <span class="sub-label">СИНХРОНИЗАЦИЯ УСТРОЙСТВА</span>
+          <h2>Мой IQOS ILUMA</h2>
+          <p>Статус подключения через Bluetooth / Smart-link Telegram</p>
+        </div>
+
+        <div class="device-card-dashboard">
+          <div class="device-preview-header">
+            <div class="device-photo-wrap">
+              <img src="assets/images/iluma_one.jpg" alt="ILUMA One">
+            </div>
+            <div class="device-meta">
+              <span class="conn-status online"><span class="dot"></span> ПОДКЛЮЧЕНО</span>
+              <h3>ILUMA ONE Graphite</h3>
+              <p class="sn-text">S/N: IQ-9924-ILUMA-PRO</p>
+              <div class="warranty-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                Гарантия до 15.08.2027
+              </div>
+            </div>
+          </div>
+
+          <div class="device-telemetry-grid">
+            <div class="telemetry-box">
+              <span class="t-label">Заряд аккумулятора</span>
+              <div class="t-value-row">
+                <span class="t-num" id="batteryLevel">88%</span>
+                <span class="t-icon">⚡</span>
+              </div>
+              <div class="battery-bar"><div class="fill" style="width: 88%;"></div></div>
+            </div>
+
+            <div class="telemetry-box">
+              <span class="t-label">Сеансов осталось</span>
+              <div class="t-value-row">
+                <span class="t-num">18 / 20</span>
+                <span class="t-icon">💨</span>
+              </div>
+              <span class="t-sub">Хватит на весь день</span>
+            </div>
+          </div>
+
+          <div class="device-actions-list">
+            <button class="dev-action-item" onclick="app.triggerAutoClean();">
+              <div class="act-icon">✨</div>
+              <div class="act-text">
+                <span class="title">Автодиагностика индукции</span>
+                <span class="sub">Проверка датчиков нагрева SMARTCORE</span>
+              </div>
+              <span class="arrow">&rsaquo;</span>
+            </button>
+            <button class="dev-action-item" onclick="app.openReplacementModal()">
+              <div class="act-icon">🛡️</div>
+              <div class="act-text">
+                <span class="title">Экспресс-замена по гарантии</span>
+                <span class="sub">Курьер доставит новое устройство за 90 мин</span>
+              </div>
+              <span class="arrow">&rsaquo;</span>
+            </button>
+            <button class="dev-action-item" onclick="app.findNearestLounge()">
+              <div class="act-icon">📍</div>
+              <div class="act-text">
+                <span class="title">Фирменные зоны & Бутики IQOS</span>
+                <span class="sub">3 точки рядом с вами</span>
+              </div>
+              <span class="arrow">&rsaquo;</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: PROFILE & CLUB PRIVILEGES -->
+      <section id="viewProfile" class="app-view">
+        <div class="profile-hero-card">
+          <div class="profile-avatar">
+            <span class="avatar-initials" id="userInitials">IQ</span>
+          </div>
+          <div class="profile-names">
+            <h3 id="userNameDisplay">IQOS Member</h3>
+            <span class="membership-level">IQOS Club Platinum Member</span>
+          </div>
+          <div class="points-balance-card">
+            <div class="points-count">
+              <span class="pts-number">1 450</span>
+              <span class="pts-currency">баллов</span>
+            </div>
+            <button class="btn-burn-points" onclick="app.claimBonus()">Потратить баллы</button>
+          </div>
+        </div>
+
+        <div class="privileges-section">
+          <h4>Привилегии вашего уровня</h4>
+          <div class="privilege-card">
+            <div class="priv-icon">🚚</div>
+            <div class="priv-info">
+              <h5>Бесплатная экспресс-доставка</h5>
+              <p>Доставка в день заказа курьером до двери</p>
+            </div>
+          </div>
+          <div class="privilege-card">
+            <div class="priv-icon">🎁</div>
+            <div class="priv-info">
+              <h5>Закрытые дегустации стиков</h5>
+              <p>Тестируйте лимитированные серии первыми</p>
+            </div>
+          </div>
+          <div class="privilege-card">
+            <div class="priv-icon">☕</div>
+            <div class="priv-info">
+              <h5>Доступ в IQOS Lounge</h5>
+              <p>Кофе и премиальный сервис в флагманских бутиках</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar (Glassmorphic iOS / Telegram Style) -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-view="viewShowroom">
+        <div class="nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        </div>
+        <span>Каталог</span>
+      </button>
+
+      <button class="nav-item" data-view="viewFlavorLab">
+        <div class="nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+        </div>
+        <span>Подбор</span>
+      </button>
+
+      <button class="nav-item" data-view="viewDevice">
+        <div class="nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <span>Девайс</span>
+      </button>
+
+      <button class="nav-item" data-view="viewProfile">
+        <div class="nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <span>Клуб</span>
+      </button>
+    </nav>
+
+    <!-- ==================== CART / CHECKOUT SLIDE-OVER SHEET ==================== -->
+    <div id="cartDrawer" class="cart-drawer">
+      <div class="cart-backdrop" id="closeCartBackdrop"></div>
+      <div class="cart-sheet">
+        <div class="sheet-handle"></div>
+        <div class="sheet-header">
+          <h3>Корзина заказа</h3>
+          <button class="close-sheet-btn" id="closeCartBtn">&times;</button>
+        </div>
+
+        <div class="cart-items-list" id="cartItemsContainer">
+          <!-- Filled dynamically -->
+        </div>
+
+        <div class="cart-footer">
+          <div class="summary-line">
+            <span>Доставка курьером</span>
+            <span class="free-tag">Бесплатно (Клуб)</span>
+          </div>
+          <div class="summary-line total-line">
+            <span>Итого к оплате:</span>
+            <span id="cartTotalPrice" class="price-val">0 ₽</span>
+          </div>
+          <button class="btn-primary checkout-btn" id="sendOrderToBotBtn">
+            <span>Оформить заказ через Telegram</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification Toast Popup -->
+    <div id="toastNotification" class="toast-popup">
+      <span class="toast-icon">✓</span>
+      <span class="toast-msg" id="toastMsg">Товар добавлен в корзину</span>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
